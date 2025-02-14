@@ -4,7 +4,22 @@
 ####################
 # Written by Kirill O. <cyberstatar@gmail.com>
 # Last update 14/02/2025
-source "/etc/lib_sync.conf" || { echo "Error: there is no file 'lib.conf'"; exit 1; }
+CONFIG="/etc/lib_sync.conf"
+
+create_config() {
+    read -p "Enter external server IP: " ip
+    read -p "Enter username: " user
+    read -p "Enter remote directory path: " libPath
+    echo -e "ip=\"$ip\"\nuser=\"$user\"\nlibPath=\"$libPath\"" | sudo tee "$CONFIG" > /dev/null
+    echo "Configuration saved to $CONFIG"
+}
+
+if [[ ! -f "$CONFIG" ]]; then
+    echo "Config file not found. Let's create it."
+    create_config
+fi
+
+source "$CONFIG" || { echo "Error: there is no file 'lib.conf'"; exit 1; }
 
 [[ -z "$user" ]] && { echo "User is not defined"; exit 2; }
 [[ -z "$ip" ]] && { echo "IP is not defined"; exit 3; }
