@@ -1,0 +1,15 @@
+#!/bin/bash
+# Simple script to synchronize local directory with external
+# server via ssh.
+####################
+# Written by Kirill O. <cyberstatar@gmail.com>
+# Last update 14/02/2025
+source "/etc/lib_sync.conf" || { echo "Error: there is no file 'lib.conf'"; exit 1; }
+
+[[ -z "$user" ]] && { echo "User is not defined"; exit 2; }
+[[ -z "$ip" ]] && { echo "IP is not defined"; exit 3; }
+[[ -d "$libPath"  ]] || { echo "$libPath is not a directory"; exit 5; } 
+
+rsync -avu "$user@$ip":"$libPath/" "$libPath/" || { echo "Synchronization error"; exit 4; }
+
+rsync -avu "$libPath/" "$user@$ip":"$libPath/"
