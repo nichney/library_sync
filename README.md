@@ -32,12 +32,12 @@ libPath=/home/myuser/library
 
 ## Usage
 The script will run automatically based on the systemd timer settings. To check the status:
-    ```bash
-    systemctl --user list-timers --all | grep library_sync ```
+
+       ```systemctl --user list-timers --all | grep library_sync ```
 To view logs:
-    ```bash
-    journalctl --user -u library_sync.service --since "10 minutes ago" ```
+
+       ```journalctl --user -u library_sync.service --since "10 minutes ago" ```
 To disable the sync timer:
-    ```bash
-    systemctl --user disable --now library_sync.timer ```
+
+       ```systemctl --user disable --now library_sync.timer ```
 
