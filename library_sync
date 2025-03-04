@@ -19,7 +19,7 @@ if [[ ! -f "$CONFIG" ]]; then
     create_config
 fi
 
-source "$CONFIG" || { echo "Error: there is no file 'lib.conf'"; exit 1; }
+source "$CONFIG" || { echo "Error: there is no file 'lib_sync.conf'"; exit 1; }
 
 [[ -z "$user" ]] && { echo "User is not defined"; exit 2; }
 [[ -z "$ip" ]] && { echo "IP is not defined"; exit 3; }
